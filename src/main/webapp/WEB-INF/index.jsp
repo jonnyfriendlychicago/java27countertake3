@@ -25,7 +25,11 @@
 	<a href= "/date">Date Template</a>
 	<a href= "/time">Time Template</a>
 	<a href= "/dojos">Dojos</a>
-	<a href= "/counter">Site Visit Counter</a>
+	<!-- <a href= "/counter">Site Visit Counter</a> -->
+	
+	<p>Count of index visits: <c:out value="${countToShow}"></c:out></p>
+	
+	<p><a href="/reset-counter/">Reset counter to zero</a></p>
 	
 	<h2>Fruits</h2>
 	

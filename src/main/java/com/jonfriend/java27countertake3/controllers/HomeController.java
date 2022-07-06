@@ -52,42 +52,53 @@ public class HomeController {
         model.addAttribute("fruitsFromHomeController", fruitsArrList);
         
 //        session.setAttribute("count", 0);
-        
+        Integer currentCount = 0; 
         if (session.getAttribute("count") == null) {
     		// Use setAttribute to initialize the count in session
         	session.setAttribute("count", 0);
     	} else {
     		// increment the count by 1 using getAttribute and setAttribute
 //    		session.count = session.getAttribute("count") += 1; 
-    		Integer currentCount = (Integer) session.getAttribute("count");
+    		currentCount = (Integer) session.getAttribute("count");
     		currentCount ++; 
     		session.setAttribute("count", currentCount); 
     		}
+        
+        model.addAttribute("countToShow", currentCount);
         
 		return "index.jsp"; 
 	}
 
 	
-	@RequestMapping("/counter")
-	public String counterApp(Model model, HttpSession session, HttpServletRequest request) {
-		Integer currentCount = 0; 
-		if (session.getAttribute("count") == null) {
-    		// Use setAttribute to initialize the count in session
-        	session.setAttribute("count", 0);
-    	} else {
-    		// increment the count by 1 using getAttribute and setAttribute
-//    		session.count = session.getAttribute("count") += 1; 
-    		currentCount = (Integer) session.getAttribute("count");
-    	}
+	@RequestMapping("/reset-counter/")
+	public String resetCounter(HttpSession session, Model model, HttpServletRequest request) {
 		
-		// we can use the following line to get the URL of our page, in this case http://localhost:8080/counter/
-		String homeUrl = request.getRequestURL().toString();
-		
-		model.addAttribute("countToShow", currentCount);
-		
-		model.addAttribute("page", homeUrl.substring(0,homeUrl.length()-9)); 
-		return "counter.jsp"; 
+		session.setAttribute("count", 0);
+
+		return "redirect:/";
 	}
+	
+//	@RequestMapping("/counter")
+//	public String counterApp(Model model, HttpSession session, HttpServletRequest request) {
+//		Integer currentCount = 0; 
+//		if (session.getAttribute("count") == null) {
+//    		// Use setAttribute to initialize the count in session
+//        	session.setAttribute("count", 0);
+//    	} else {
+//    		// increment the count by 1 using getAttribute and setAttribute
+////    		session.count = session.getAttribute("count") += 1; 
+//    		currentCount = (Integer) session.getAttribute("count");
+//    	}
+//		
+//		// we can use the following line to get the URL of our page, in this case http://localhost:8080/counter/
+////		String homeUrl = request.getRequestURL().toString();
+//		
+//		model.addAttribute("countToShow", currentCount);
+//		
+////		model.addAttribute("page", homeUrl.substring(0,homeUrl.length()-9)); 
+//		
+//		return "counter.jsp"; 
+//	}
 	
 	@RequestMapping("/date")
 	public String dateRoute(Model model) {
